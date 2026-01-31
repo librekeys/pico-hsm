@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 /*
- * This file is part of the Pico HSM distribution (https://github.com/polhenarejos/pico-hsm).
+ * This file is part of the Pico HSM distribution (https://github.com/librekeys/pico-hsm).
  * Copyright (c) 2022 Pol Henarejos.
  *
  * This program is free software: you can redistribute it and/or modify
@@ -549,7 +549,7 @@ def parse_derivation_path(path):
 def main(args):
     sys.stderr.buffer.write(b'Pico HSM Tool v2.4\n')
     sys.stderr.buffer.write(b'Author: Pol Henarejos\n')
-    sys.stderr.buffer.write(b'Report bugs to https://github.com/polhenarejos/pico-hsm/issues\n')
+    sys.stderr.buffer.write(b'Report bugs to https://github.com/librekeys/pico-hsm/issues\n')
     sys.stderr.buffer.write(b'\n\n')
     sys.stderr.flush()
 

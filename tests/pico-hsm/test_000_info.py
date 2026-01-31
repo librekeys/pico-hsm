@@ -1,6 +1,6 @@
 """
 /*
- * This file is part of the Pico HSM distribution (https://github.com/polhenarejos/pico-hsm).
+ * This file is part of the Pico HSM distribution (https://github.com/librekeys/pico-hsm).
  * Copyright (c) 2022 Pol Henarejos.
  *
  * This program is free software: you can redistribute it and/or modify

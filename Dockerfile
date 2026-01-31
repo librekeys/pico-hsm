@@ -33,7 +33,7 @@ ARG VERSION_MAJOR 4
 ARG VERSION_MINOR 2
 
 RUN cd /home/builduser \
-	&& git clone https://github.com/polhenarejos/pico-hsm.git \
+	&& git clone https://github.com/librekeys/pico-hsm.git \
 	&& cd pico-hsm \
 	&& git checkout v${VERSION_MAJOR}.${VERSION_MINOR} \
 	&& git submodule update --init --recursive \
