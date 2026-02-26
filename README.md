@@ -194,7 +194,7 @@ Note that the [PicoKey App](https://www.picokeys.com/picokeyapp/ "PicoKey App") 
 Before building, ensure you have installed the toolchain for the Pico and the Pico SDK is properly located in your drive.
 
 ```
-git clone https://github.com/polhenarejos/pico-hsm
+git clone https://github.com/librekeys/pico-hsm
 git submodule update --init --recursive
 cd pico-hsm
 mkdir build
