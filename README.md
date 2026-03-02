@@ -1,6 +1,9 @@
 # Pico HSM
 This project aims to transform a Raspberry Pi Pico or ESP32 microcontroller into a Hardware Security Module (HSM). The modified Pico or ESP32 board will be capable of generating and storing private keys, performing AES encryption or decryption, and signing data without exposing the private key. Specifically, the private key remains securely on the board and cannot be retrieved since it is encrypted within the flash memory.
 
+This is a fork of the community edition of the project located at https://github.com/polhenarejos/pico-hsm
+For licensing information, see the LICENSE file
+
 ## Capabilities
 ### > Key generation and encrypted storage
 Private and secret keys are secured using a master AES 256 key (MKEK). The MKEK is encrypted with a hashed and salted version of the PIN.
@@ -179,17 +182,6 @@ In the event that the Pico is stolen, the private and secret key contents cannot
 ### RP2350 and ESP32-S3
 RP2350 and ESP32-S3 microcontrollers are equipped with advanced security features, including Secure Boot and Secure Lock, ensuring that firmware integrity and authenticity are tightly controlled. Both devices support the storage of the Master Key Encryption Key (MKEK) in an OTP (One-Time Programmable) memory region, making it permanently inaccessible for external access or tampering. This secure, non-volatile region guarantees that critical security keys are embedded into the hardware, preventing unauthorized access and supporting robust defenses against code injection or firmware modification. Together, Secure Boot and Secure Lock enforce firmware authentication, while the MKEK in OTP memory solidifies the foundation for secure operations.
 
-## Download
-**If you own an ESP32-S3 board, go to [ESP32 Flasher](https://www.picokeys.com/esp32-flasher/) for flashing your Pico HSM.**
-
-If you own a Raspberry Pico (RP2040 or RP2350), go to [Download page](https://www.picokeys.com/getting-started/). If your board is mounted with the RP2040, then select Pico. If your board is mounted with the RP2350 or RP2354, select Pico2.
-
-UF2 files are shiped with a VID/PID granted by RaspberryPi (2E8A:10FD). If you plan to use it with OpenSC or similar tools, you should modify Info.plist of CCID driver to add these VID/PID or use the [PicoKey App](https://www.picokeys.com/picokeyapp/ "PicoKey App").
-
-You can use whatever VID/PID for internal purposes, but remember that you are not authorized to distribute the binary with a VID/PID that you do not own.
-
-Note that the [PicoKey App](https://www.picokeys.com/picokeyapp/ "PicoKey App") is the most recommended.
-
 ## Build for Raspberry Pico
 Before building, ensure you have installed the toolchain for the Pico and the Pico SDK is properly located in your drive.
 
@@ -199,10 +191,10 @@ git submodule update --init --recursive
 cd pico-hsm
 mkdir build
 cd build
-PICO_SDK_PATH=/path/to/pico-sdk cmake .. -DPICO_BOARD=board_type -DUSB_VID=0x1234 -DUSB_PID=0x5678
+PICO_SDK_PATH=/path/to/pico-sdk cmake .. -DPICO_BOARD=board_type -DUSB_VID=0x1D50 -DUSB_PID=0x619B
 make
 ```
-Note that `PICO_BOARD`, `USB_VID` and `USB_PID` are optional. If not provided, `pico` board and VID/PID `FEFF:FCFD` will be used.
+Note that `PICO_BOARD`, `USB_VID` and `USB_PID` are optional. If not provided, `pico` board and VID/PID `1D50:619B` will be used.
 
 Additionally, you can pass the `VIDPID=value` parameter to build the firmware with a known VID/PID. The supported values are:
 
@@ -216,6 +208,9 @@ Additionally, you can pass the `VIDPID=value` parameter to build the firmware wi
 - `YubiHSM`
 - `Gnuk`
 - `GnuPG`
+
+You can use whatever VID/PID for your own personal use. **But remember that you are not authorized to distribute the binary with a VID/PID that you do not own.**
+The VID/PID `1D50:619B` is provided to the project by [OpenMoko](https://wiki.openmoko.org/wiki/USB_Product_IDs). It can only be used for builds distributed under a free and open source license.
 
 After running `make`, the binary file `pico_hsm.uf2` will be generated. To load this onto your Pico board:
 
@@ -337,52 +332,8 @@ For advanced usage scenarios, refer to the documentation and examples provided. 
 
 ## License and Commercial Use
 
-This project is available under two editions:
-
-**Community Edition (FOSS)**
-- Released under the GNU Affero General Public License v3 (AGPLv3).
-- You are free to study, modify, and run the code, including for internal evaluation.
-- If you distribute modified binaries/firmware, OR if you run a modified version of this project as a network-accessible service, you must provide the corresponding source code to the users of that binary or service, as required by AGPLv3.
-- No warranty. No SLA. No guaranteed support.
-
-**Enterprise / Commercial Edition**
-- Proprietary license for organizations that want to:
-  - run this in production with multiple users/devices,
-  - integrate it into their own product/appliance,
-  - enforce corporate policies (PIN policy, admin/user roles, revocation),
-  - deploy it as an internal virtualized / cloud-style service,
-  - and *not* be required to publish derivative source code.
-- Base package includes:
-  - commercial license (no AGPLv3 disclosure obligation for your modifications / integration)
-  - onboarding call
-  - access to officially signed builds
-- Optional / on-demand enterprise components that can be added case-by-case:
-  - ability to operate in multi-user / multi-device environments
-  - device inventory, traceability and secure revocation/offboarding
-  - custom attestation, per-organization device identity / anti-cloning
-  - virtualization / internal "HSM or auth backend" service for multiple teams or tenants
-  - post-quantum (PQC) key material handling and secure PQC credential storage
-  - hierarchical deterministic key derivation (HD wallet–style key trees for per-user / per-tenant keys, firmware signing trees, etc.)
-  - cryptographically signed audit trail / tamper-evident logging
-  - dual-control / two-person approval for high-risk operations
-  - secure key escrow / disaster recovery strategy
-  - release-signing / supply-chain hardening toolchain
-  - policy-locked hardened mode ("FIPS-style profile")
-  - priority security-response SLA
-  - white-label demo / pre-sales bundle
-
-Typical licensing models:
-- Internal use (single legal entity, including internal private cloud / virtualized deployments).
-- OEM / Redistribution / Service (ship in your product OR offer it as a service to third parties).
-
-These options are scoped and priced individually depending on which components you actually need.
-
-For commercial licensing and enterprise features, email pol@henarejos.me
-Subject: `ENTERPRISE LICENSE <your company name>`
-
-See `ENTERPRISE.md` for details.
+This project is released under the GNU Affero General Public License v3 (AGPLv3).
+A copy of the AGPLv3 license is available in the `LICENSE` file.
 
 ## Credits
-Pico HSM uses the following libraries or portion of code:
-- mbedTLS for cryptographic operations.
-- TinyUSB for low level USB procedures.
+This project uses libraries and portion of code from other projects that are detailed in the `LICENSE` file.

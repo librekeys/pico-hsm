@@ -21,7 +21,7 @@ To take advantage of PKA, the following is required:
 
 ## Usage
 
-Before using SCS3, it must be patched [scs3.patch.txt](https://github.com/user-attachments/files/20274013/scs3.patch.txt). See [SCS3](/doc/scs3.md "SCS3") for further details.
+Before using SCS3, it must be patched [scs3.patch.txt](https://github.com/librekeys/pico-hsm/files/8890050/scs3.patch.txt). See [SCS3](/doc/scs3.md "SCS3") for further details.
 
 ### Generate the authentication key
 
